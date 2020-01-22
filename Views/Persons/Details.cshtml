@@ -1,0 +1,53 @@
+﻿@model IMDeanyP.Models.Person
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Person</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonFname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonFname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonSname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonSname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonImage)
+        </dt>
+
+        <dd>
+           @if  (Model.PersonImage != null)
+           {
+               <img src="@Url.Content(Model.PersonImage)" width="100" />
+           }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PersonId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

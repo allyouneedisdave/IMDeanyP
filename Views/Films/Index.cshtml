@@ -1,0 +1,60 @@
+﻿@model IEnumerable<IMDeanyP.Models.Film>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FilmTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilmGenre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilmDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilmReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilmImage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmGenre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmDescTrimmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmReleaseDate)
+            </td>
+            <td>
+                @if (item.FilmImage != null)
+                {
+                    <img src="@Url.Content(item.FilmImage)" width="100" />
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FilmID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.FilmID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FilmID })
+            </td>
+        </tr>
+}
+
+</table>

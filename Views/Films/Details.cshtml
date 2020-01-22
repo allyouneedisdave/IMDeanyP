@@ -1,0 +1,61 @@
+﻿@model IMDeanyP.Models.Film
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Film</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FilmTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FilmTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FilmGenre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FilmGenre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FilmDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FilmDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FilmReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FilmReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FilmImage)
+        </dt>
+
+        <dd>
+            @if  (Model.FilmImage != null)
+            {
+                <img src="@Url.Content(Model.FilmImage)" width="100">
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FilmID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
