@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,7 +18,7 @@ namespace IMDeanyP.Controllers
         // GET: Persons
         public ActionResult Index()
         {
-            return View(db.Persons.ToList());
+            return View(db.Person.ToList());
         }
 
         // GET: Persons/Details/5
@@ -27,7 +28,7 @@ namespace IMDeanyP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = db.Person.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -46,16 +47,41 @@ namespace IMDeanyP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PersonId,PersonFname,PersonSname,PersonDesc,PersonImage")] Person person)
+        public ActionResult Create([Bind(Include = "PersonId,PersonFname,PersonSname,PersonDesc,PersonImage")] Person person, HttpPostedFileBase upload)
         {
+            //if we have valid data in the form
             if (ModelState.IsValid)
             {
-                db.Persons.Add(person);
+                //check to see if a file has been uploaded
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    //check to see if valid MIME type (JPG / PNG or GIF images)
+                    if (upload.ContentType == "image/jpeg" ||
+                        upload.ContentType == "image/jpg" ||
+                        upload.ContentType == "image/gif" ||
+                        upload.ContentType == "image/png")
+                    {
+                        //construct a path to put the file in an Images subfolder in Content
+                        string path = Path.Combine(Server.MapPath("~/Content/Images"), Path.GetFileName(upload.FileName));
+                        //save the file to that path location
+                        upload.SaveAs(path);
+
+                        //store the relative path to the image in the database
+                        person.PersonImage = "~/Content/Images/" + Path.GetFileName(upload.FileName);
+                    }
+                    else
+                    {
+                        //construct a message that can be displayed in the view
+                        ViewBag.Message = "Not valid image format";
+                    }
+                }
+                //add the person to the database and save
+                db.Person.Add(person);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(person);
+
         }
 
         // GET: Persons/Edit/5
@@ -65,7 +91,7 @@ namespace IMDeanyP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = db.Person.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -78,10 +104,36 @@ namespace IMDeanyP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PersonId,PersonFname,PersonSname,PersonDesc,PersonImage")] Person person)
+        public ActionResult Edit([Bind(Include = "PersonId,PersonFname,PersonSname,PersonDesc,PersonImage")] Person person, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                //check to see if a file has been uploaded
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    //check to see if valid MIME type (JPG / PNG or GIF images)
+                    if (upload.ContentType == "image/jpeg" ||
+                        upload.ContentType == "image/jpg" ||
+                        upload.ContentType == "image/gif" ||
+                        upload.ContentType == "image/png")
+                    {
+                        //construct a path to put the file in an Images subfolder in Content
+                        string path = Path.Combine(Server.MapPath("~/Content/Images"), Path.GetFileName(upload.FileName));
+
+                        //save the file to that path location
+                        upload.SaveAs(path);
+
+                        //store the relative path to the image in the database
+                        person.PersonImage = "~/Content/Images/" + Path.GetFileName(upload.FileName);
+
+                    }
+                    else
+                    {
+                        //construct a message that can be displayed in the view
+                        ViewBag.Message = "Not valid image format";
+                    }
+                }
+
                 db.Entry(person).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,7 +148,7 @@ namespace IMDeanyP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = db.Person.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -109,8 +161,8 @@ namespace IMDeanyP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Person person = db.Persons.Find(id);
-            db.Persons.Remove(person);
+            Person person = db.Person.Find(id);
+            db.Person.Remove(person);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

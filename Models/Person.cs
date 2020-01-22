@@ -7,7 +7,7 @@ using System.Web;
 
 namespace IMDeanyP.Models
 {
-    [Table("PERSONS")]
+    [Table("PERSON")]
     public class Person
     {
         [Column("person_id")]
