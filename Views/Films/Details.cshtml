@@ -56,6 +56,7 @@
     </dl>
 </div>
 <p>
+    @Html.ActionLink("Add Actor", "Create", "Actings", new { subName = "Film", FilmId = Model.FilmID } , null) |
     @Html.ActionLink("Edit", "Edit", new { id = Model.FilmID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

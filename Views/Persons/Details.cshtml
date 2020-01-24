@@ -48,6 +48,7 @@
     </dl>
 </div>
 <p>
+    @Html.ActionLink("Add Acting Credit", "Create", "Actings", new {  subName = "Person", PersonId = Model.PersonId }, null) |
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

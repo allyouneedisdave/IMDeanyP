@@ -10,6 +10,8 @@ namespace IMDeanyP.Models
     {
         public DbSet<Film> Films { get; set; }
 
-        public DbSet<Person> Person { get; set; }
+        public DbSet<Person> Persons { get; set; }
+
+        public DbSet<Acting> Actings { get; set; }
     }
 }

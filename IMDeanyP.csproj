@@ -127,15 +127,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActingsController.cs" />
     <Compile Include="Controllers\FilmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Acting.cs" />
     <Compile Include="Models\DBContext.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\ViewModels\ActingListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +187,11 @@
     <Content Include="Views\Persons\Details.cshtml" />
     <Content Include="Views\Persons\Edit.cshtml" />
     <Content Include="Views\Persons\Index.cshtml" />
+    <Content Include="Views\Actings\Create.cshtml" />
+    <Content Include="Views\Actings\Delete.cshtml" />
+    <Content Include="Views\Actings\Details.cshtml" />
+    <Content Include="Views\Actings\Edit.cshtml" />
+    <Content Include="Views\Actings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

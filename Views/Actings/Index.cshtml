@@ -1,0 +1,63 @@
+﻿@model IEnumerable<IMDeanyP.Models.ViewModels.ActingListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+       <th>
+           @Html.DisplayNameFor(model => model.Film.FilmTitle)
+       </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Film.FilmImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actor.PersonFname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actor.PersonSname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actor.PersonImage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       <th>
+           @Html.DisplayFor(modelitem => item.Film.FilmTitle)
+       </th>
+        <th>
+            @if (item.Film.FilmImage != null)
+            {
+                <img src="@Url.Content(item.Film.FilmImage)" width="100" />
+            }
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.Actor.PersonFname)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.Actor.PersonSname)
+        </th>
+        <th>
+            @if (item.Actor.PersonImage != null)
+            {
+                <img src="@Url.Content(item.Actor.PersonImage)" width="100" />
+            }
+        </th>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id = item.ActingCredit.ActingId}) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ActingCredit.ActingId })
+        </td>
+    </tr>
+}
+
+</table>
