@@ -18,7 +18,7 @@ namespace IMDeanyP.Controllers
         // GET: Persons
         public ActionResult Index()
         {
-            return View(db.Person.ToList());
+            return View(db.Persons.ToList());
         }
 
         // GET: Persons/Details/5
@@ -28,7 +28,7 @@ namespace IMDeanyP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Person.Find(id);
+            Person person = db.Persons.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -76,7 +76,7 @@ namespace IMDeanyP.Controllers
                     }
                 }
                 //add the person to the database and save
-                db.Person.Add(person);
+                db.Persons.Add(person);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -91,7 +91,7 @@ namespace IMDeanyP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Person.Find(id);
+            Person person = db.Persons.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -148,7 +148,7 @@ namespace IMDeanyP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Person.Find(id);
+            Person person = db.Persons.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -161,8 +161,8 @@ namespace IMDeanyP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Person person = db.Person.Find(id);
-            db.Person.Remove(person);
+            Person person = db.Persons.Find(id);
+            db.Persons.Remove(person);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

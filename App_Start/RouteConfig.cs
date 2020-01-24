@@ -14,9 +14,17 @@ namespace IMDeanyP
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Add Actor (Film)",
+                url: "Actings/Create/{subName}/{FilmId}",
+                defaults: new { controller = "Actingd", Action = "Create", FilmId = UrlParameter.Optional},
+                //as long as this subname is given, the above route applies
+                constraints: new { subName = "Film" }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional } 
             );
         }
     }
