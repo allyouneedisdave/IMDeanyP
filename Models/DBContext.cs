@@ -13,5 +13,8 @@ namespace IMDeanyP.Models
         public DbSet<Person> Persons { get; set; }
 
         public DbSet<Acting> Actings { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
     }
 }

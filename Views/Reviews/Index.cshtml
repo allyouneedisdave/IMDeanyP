@@ -1,0 +1,51 @@
+﻿@model IEnumerable<IMDeanyP.Models.ViewModels.FilmReviewViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Film.FilmTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Review.ReviewUname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Review.ReviewContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Review.ReviewRating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Film.FilmTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Review.ReviewUname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Review.ReviewContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Review.ReviewRating)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Review.ReviewID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Review.ReviewID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Review.ReviewID })
+        </td>
+    </tr>
+}
+
+</table>

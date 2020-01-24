@@ -1,0 +1,51 @@
+﻿@model IMDeanyP.Models.ViewModels.FilmReviewViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Film.FilmTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Film.FilmTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Review.ReviewUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Review.ReviewUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Review.ReviewContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Review.ReviewContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Review.ReviewRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Review.ReviewRating)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Go to Film", "Details", "FIlms", new { id = Model.Review.FilmID}, null) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Review.ReviewID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

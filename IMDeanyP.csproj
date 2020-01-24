@@ -131,6 +131,7 @@
     <Compile Include="Controllers\FilmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -138,7 +139,9 @@
     <Compile Include="Models\DBContext.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Models\ViewModels\ActingListViewModel.cs" />
+    <Compile Include="Models\ViewModels\FilmReviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +155,19 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Stars\jquery.barrating.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Stars\jquery.barrating.min.js" />
+    <Content Include="Scripts\Stars\themes\bars-1to10.css" />
+    <Content Include="Scripts\Stars\themes\bars-horizontal.css" />
+    <Content Include="Scripts\Stars\themes\bars-movie.css" />
+    <Content Include="Scripts\Stars\themes\bars-pill.css" />
+    <Content Include="Scripts\Stars\themes\bars-reversed.css" />
+    <Content Include="Scripts\Stars\themes\bars-square.css" />
+    <Content Include="Scripts\Stars\themes\bootstrap-stars.css" />
+    <Content Include="Scripts\Stars\themes\css-stars.css" />
+    <Content Include="Scripts\Stars\themes\fontawesome-stars-o.css" />
+    <Content Include="Scripts\Stars\themes\fontawesome-stars.css" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -192,6 +207,11 @@
     <Content Include="Views\Actings\Details.cshtml" />
     <Content Include="Views\Actings\Edit.cshtml" />
     <Content Include="Views\Actings\Index.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
