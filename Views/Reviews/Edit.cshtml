@@ -4,6 +4,26 @@
     ViewBag.Title = "Edit";
 }
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        //for each of the Rating dropdowns...
+        $('.Rating').each(function () {
+            //get the value of the id from the hidden field
+            //next to it
+            var selectedId = $(this).next().val();
+            //now apply this as the selected id to the current
+            //dropdown box
+            $(this).val(selectedId);
+        });
+
+        //now apply the plugin
+        $('.Rating').barrating({
+            theme: 'fontawesome-stars'
+        });
+    })
+  
+</script>
+
 <h2>Edit</h2>
 
 
@@ -20,8 +40,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FilmID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FilmID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FilmID, "", new { @class = "text-danger" })
+                 <input type="hidden" name="FilmID" value="@ViewBag.FilmID" />
+                @ViewBag.FilmTitle
             </div>
         </div>
 
@@ -44,8 +64,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ReviewRating, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ReviewRating, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReviewRating, "", new { @class = "text-danger" })
+                <select class="Rating" name="ReviewRating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <input type="hidden" class="initialRating" value="@Model.ReviewRating" />
+
+                @Html.ValidationMessageFor(model => model.ReviewRating, "", new {  @class = "text-danger"})
+
             </div>
         </div>
 

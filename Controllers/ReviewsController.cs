@@ -65,7 +65,7 @@ namespace IMDeanyP.Controllers
             FilmReview.Film = film;
 
             //send the view model to the view
-            return View(review);
+            return View(FilmReview);
         }
 
         // GET: Reviews/Create
@@ -115,6 +115,14 @@ namespace IMDeanyP.Controllers
             {
                 return HttpNotFound();
             }
+
+            //if we have a review, select film where id matches
+            Film film = db.Films.Where(x => x.FilmID == review.FilmID).Single();
+
+            //then populate these values in the viewbag
+            ViewBag.FilmID = film.FilmID;
+            ViewBag.FilmTitle = film.FilmTitle;
+
             return View(review);
         }
 
