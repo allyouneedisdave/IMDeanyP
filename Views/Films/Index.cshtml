@@ -45,19 +45,20 @@
     <tr>
         <th>
             @Html.ActionLink("Film Title", "Index",
-           new { sortOrder = ViewBag.TitleSortParam })
+           new { sortOrder = ViewBag.TitleSortParam,
+           currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FilmGenre)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().FilmGenre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FilmDesc)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().FilmDesc)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FilmReleaseDate)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().FilmReleaseDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FilmImage)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().FilmImage)
         </th>
         <th></th>
     </tr>
@@ -91,3 +92,10 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ?
+        0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new {  page, sortOrder = ViewBag.CurrentSort,
+    currentFilter = ViewBag.CurrentFilter }))

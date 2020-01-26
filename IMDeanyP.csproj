@@ -147,6 +147,7 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\ViewModels\ActingListViewModel.cs" />
+    <Compile Include="Models\ViewModels\FilmPageViewModel.cs" />
     <Compile Include="Models\ViewModels\FilmReviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

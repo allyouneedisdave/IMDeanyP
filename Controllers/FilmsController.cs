@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IMDeanyP.Models;
+using IMDeanyP.Models.ViewModels;
 using PagedList;
 
 namespace IMDeanyP.Controllers
@@ -38,7 +39,7 @@ namespace IMDeanyP.Controllers
 
 
         // GET: Films
-        public ActionResult Index(string sortOrder, string searchString, string currentFiter, int? page)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             //for the viewbag to keep a note of current sort order
             ViewBag.CurrentSort = sortOrder;
@@ -58,7 +59,7 @@ namespace IMDeanyP.Controllers
             else
             {
                 //if no search string, set to the current filter
-                searchString = currentFiter;
+                searchString = currentFilter;
             }
 
             //the current filter is now the search string - note kept in view
@@ -99,7 +100,7 @@ namespace IMDeanyP.Controllers
 
         // GET: Films/Details/5
         public ActionResult Details(int? id)
-        {
+       {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,7 +110,37 @@ namespace IMDeanyP.Controllers
             {
                 return HttpNotFound();
             }
-            return View(film);
+
+            //new view model object
+            FilmPageViewModel filmPage = new FilmPageViewModel();
+
+            //get the current film and assign to view model
+            filmPage.Film = film;
+            //populate the Reviews list for the view model by matching all reviews
+            //where the film id matches
+            filmPage.Reviews = db.Reviews.Where(x => x.FilmID == film.FilmID).ToList();
+
+            //for actors, first we need to get all related records in the join table
+            IList<Acting> actorLinks = db.Actings.Where(x => x.FilmId == film.FilmID).ToList();
+            //then we'll construct a list of the person records to match
+            IList<Person> actors = new List<Person>();
+            //here we loop through the acting records in the join table
+            foreach (Acting a in actorLinks)
+            {
+                //and add to the list of actors the matching person record for each
+                actors.Add(db.Persons.Where(x => x.PersonId == a.PersonId).Single());
+            }
+            //once populated, we can assign the list of people as actors to the view model
+            filmPage.Actors = actors;
+            //here we will use a LINQ query to get the average review score for reviews
+            //related to this film - the additional ? symbols are if there is a null result
+            //if so we set to 0
+            ViewBag.AverageReview =
+                db.Reviews.Where(x => x.FilmID == film.FilmID)
+                    .Average(x => (double?)x.ReviewRating) ?? 0;
+
+            //return the view model to use
+            return View(filmPage);
         }
 
         // GET: Films/Create

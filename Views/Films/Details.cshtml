@@ -1,8 +1,29 @@
-﻿@model IMDeanyP.Models.Film
+﻿@model IMDeanyP.Models.ViewModels.FilmPageViewModel
 
 @{
     ViewBag.Title = "Details";
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //for each of the Rating dropdowns...
+        $('.Rating').each(function () {
+            //get the value of the id from the hidden field
+            //next to it
+            var selectedId = $(this).next().val();
+            //now apply this as the selected id to the current
+            //dropdown box
+            $(this).val(selectedId);
+        });
+
+        //now apply the plugin and set to readonly
+        $('.Rating').barrating({
+            theme: 'fontawesome-stars',
+            readonly: true
+        });
+    });
+
+</script>
 
 <h2>Details</h2>
 
@@ -11,53 +32,155 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FilmTitle)
+            @Html.DisplayNameFor(model => model.Film.FilmTitle)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilmTitle)
+            @Html.DisplayFor(model => model.Film.FilmTitle)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FilmGenre)
+            @Html.DisplayNameFor(model => model.Film.FilmGenre)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilmGenre)
+            @Html.DisplayFor(model => model.Film.FilmGenre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FilmDesc)
+            @Html.DisplayNameFor(model => model.Film.FilmDesc)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilmDesc)
+            @Html.DisplayFor(model => model.Film.FilmDesc)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FilmReleaseDate)
+            @Html.DisplayNameFor(model => model.Film.FilmReleaseDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilmReleaseDate)
+            @Html.DisplayFor(model => model.Film.FilmReleaseDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FilmImage)
+            @Html.DisplayNameFor(model => model.Film.FilmImage)
         </dt>
 
         <dd>
-            @if  (Model.FilmImage != null)
+            @if  (Model.Film.FilmImage != null)
             {
-                <img src="@Url.Content(Model.FilmImage)" width="100">
+                <img src="@Url.Content(Model.Film.FilmImage)" width="100">
             }
         </dd>
 
+        <dt>
+            Average Review Score
+        </dt>
+
+        <dd>
+            @ViewBag.AverageReview
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Add Review", "Create", "Reviews", new { id = Model.FilmID }, null) |
-    @Html.ActionLink("Add Actor", "Create", "Actings", new { subName = "Film", FilmId = Model.FilmID } , null) |
-    @Html.ActionLink("Edit", "Edit", new { id = Model.FilmID }) |
+    @Html.ActionLink("Add Review", "Create", "Reviews", new { id = Model.Film.FilmID }, null) |
+    @Html.ActionLink("Add Actor", "Create", "Actings", new { subName = "Film", FilmId = Model.Film.FilmID } , null) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Film.FilmID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<div>
+    <h4>Reviews</h4>
+    <hr />
+    @foreach (var review in Model.Reviews)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => review.ReviewRating)
+            </dt>
+
+            <dd>
+                <select class="Rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <input type="hidden" class="initialRating" value="@review.ReviewRating" />
+
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => review.ReviewUname)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => review.ReviewUname)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => review.ReviewContent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => review.ReviewContentTrimmed)
+            </dd>
+        </dl>
+        <p>
+            @Html.ActionLink("Full Review", "Details", "Reviews",
+           new { id = review.ReviewID }, "") |
+            @Html.ActionLink("Edit Review", "Edit", "Reviews", new { id = review.ReviewID }, null) |
+            @Html.ActionLink("All Reviews", "Index", "Reviews")
+        </p>
+        <div>
+            <h4>Actors</h4>
+            <hr />
+            @foreach (var actor in Model.Actors)
+            {
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => actor.PersonFname)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => actor.PersonFname)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => actor.PersonSname)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => actor.PersonSname)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => actor.PersonDesc)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => actor.PersonDescTrimmed)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => actor.PersonImage)
+                    </dt>
+
+                    <dd>
+                        @if (actor.PersonImage != null)
+                        {
+                            <img src="@Url.Content(actor.PersonImage)" width="100" />
+                        }
+                    </dd>
+
+                </dl>
+                <p>
+                    @Html.ActionLink("Full Bio", "Details", "Persons",
+                   new { id = actor.PersonId }, "") |
+                    @Html.ActionLink("Edit Person", "Edit", "Persons", new { id = actor.PersonId }, null ) |
+                </p>
+            }
+        </div>
+    }
+</div>
