@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IMDeanyP.Models;
+using PagedList;
 
 namespace IMDeanyP.Controllers
 {
@@ -15,10 +16,85 @@ namespace IMDeanyP.Controllers
     {
         private DBContext db = new DBContext();
 
-        // GET: Films
-        public ActionResult Index()
+        //to be accessed via AJAX - autocomplete jQuery UI plugin
+        public ActionResult Search(string term)
         {
-            return View(db.Films.ToList());
+            //select all the films in the db
+            //and get the id and title only
+            //id and label used for autocomplete functionality
+            var films = from f in db.Films
+                        select new
+                        {
+                            id = f.FilmID,
+                            label = f.FilmTitle
+                        };
+
+            //now check the searchstring given for any matches in title
+            films = films.Where(f => f.label.Contains(term));
+
+            //convert to and return the JSON for the search UI
+            return Json(films, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: Films
+        public ActionResult Index(string sortOrder, string searchString, string currentFiter, int? page)
+        {
+            //for the viewbag to keep a note of current sort order
+            ViewBag.CurrentSort = sortOrder;
+
+            //add a new value to the Viewbag to retain current sort order
+            //check if the sortOrder param is empty - if so we'll set the next choice
+            //to title_desc (order by title descending) otherwise empty string
+            //lets us construct a toggle link for the alternative
+            ViewBag.TitleSortParam = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+
+            //if there is a search string
+            if(searchString != null)
+            {
+                //set page as 1
+                page = 1;
+            }
+            else
+            {
+                //if no search string, set to the current filter
+                searchString = currentFiter;
+            }
+
+            //the current filter is now the search string - note kept in view
+            ViewBag.CurrentFilter = searchString;
+
+            //select all the films in the db
+            var films = from f in db.Films select f;
+
+            //check if the search string is not empty
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                //if we have a searchterm, then select where the title contains it
+                //analogous to LIKE %term% in SQL
+                films = films.Where(f => f.FilmTitle.Contains(searchString));
+            }
+
+            //check the sortOrder param
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    //order by title descending
+                    films = films.OrderByDescending(f => f.FilmTitle);
+                    break;
+                default:
+                    //order by title ascending
+                    films = films.OrderBy(f => f.FilmTitle);
+                    break;
+            }
+
+            //how many records per page (could also be a param...)
+            int pageSize = 3;
+            //if page is null set to 1 otherwise keep page value
+            int pageNumber = (page ?? 1);
+
+            //send the updated films list to the view
+            return View(films.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Films/Details/5

@@ -1,18 +1,51 @@
-﻿@model IEnumerable<IMDeanyP.Models.Film>
+﻿@model PagedList.IPagedList<IMDeanyP.Models.Film>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //find the control with the name searchString
+        //and apply autocomplete plugin
+        $("[name='searchString']").autocomplete({
+            //get data from Search action
+            source: '@Url.Action("Search")',
+            //search when min 2 characters entered
+            minLength: 2,
+            //when option selected
+            select: function (event, ui) {
+                //go to the Details action and append the id
+                //from the JSON results
+                window.location = '@Url.Action("Details")'
+                    + '/' + ui.item.id
+            }
+        });
+    })
+</script>
 
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Films", FormMethod.Get))
+{
+    <p>
+        Find by title: @Html.TextBox("searchString",
+                      ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FilmTitle)
+            @Html.ActionLink("Film Title", "Index",
+           new { sortOrder = ViewBag.TitleSortParam })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FilmGenre)

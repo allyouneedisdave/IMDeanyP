@@ -238,3 +238,7 @@ C:\Users\davel\Source\Repos\IMDeanyP2\bin\roslyn\vbc.exe.config
 C:\Users\davel\Source\Repos\IMDeanyP2\bin\roslyn\vbc.rsp
 C:\Users\davel\Source\Repos\IMDeanyP2\bin\roslyn\VBCSCompiler.exe
 C:\Users\davel\Source\Repos\IMDeanyP2\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\davel\Source\Repos\IMDeanyP\bin\PagedList.dll
+C:\Users\davel\Source\Repos\IMDeanyP\bin\PagedList.Mvc.dll
+C:\Users\davel\Source\Repos\IMDeanyP\bin\PagedList.xml
+C:\Users\davel\Source\Repos\IMDeanyP\bin\PagedList.Mvc.xml
