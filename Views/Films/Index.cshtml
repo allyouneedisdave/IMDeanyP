@@ -7,7 +7,7 @@
 }
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         //find the control with the name searchString
         //and apply autocomplete plugin
         $("[name='searchString']").autocomplete({
@@ -16,7 +16,7 @@
             //search when min 2 characters entered
             minLength: 2,
             //when option selected
-            select: function (event, ui) {
+            select: function(event, ui) {
                 //go to the Details action and append the id
                 //from the JSON results
                 window.location = '@Url.Action("Details")'

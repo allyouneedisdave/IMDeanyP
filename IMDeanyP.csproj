@@ -181,19 +181,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.theme.css" />
     <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.theme.min.css" />
     <Content Include="Scripts\jquery-ui-1.12.1\LICENSE.txt" />
-    <Content Include="Scripts\Stars\jquery.barrating.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\Stars\jquery.barrating.min.js" />
-    <Content Include="Scripts\Stars\themes\bars-1to10.css" />
-    <Content Include="Scripts\Stars\themes\bars-horizontal.css" />
-    <Content Include="Scripts\Stars\themes\bars-movie.css" />
-    <Content Include="Scripts\Stars\themes\bars-pill.css" />
-    <Content Include="Scripts\Stars\themes\bars-reversed.css" />
-    <Content Include="Scripts\Stars\themes\bars-square.css" />
-    <Content Include="Scripts\Stars\themes\bootstrap-stars.css" />
-    <Content Include="Scripts\Stars\themes\css-stars.css" />
-    <Content Include="Scripts\Stars\themes\fontawesome-stars-o.css" />
-    <Content Include="Scripts\Stars\themes\fontawesome-stars.css" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -205,6 +193,17 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Stars\jquery.barrating.min.js" />
+    <Content Include="Scripts\Stars\themes\bars-1to10.css" />
+    <Content Include="Scripts\Stars\themes\bars-horizontal.css" />
+    <Content Include="Scripts\Stars\themes\bars-movie.css" />
+    <Content Include="Scripts\Stars\themes\bars-pill.css" />
+    <Content Include="Scripts\Stars\themes\bars-reversed.css" />
+    <Content Include="Scripts\Stars\themes\bars-square.css" />
+    <Content Include="Scripts\Stars\themes\bootstrap-stars.css" />
+    <Content Include="Scripts\Stars\themes\css-stars.css" />
+    <Content Include="Scripts\Stars\themes\fontawesome-stars-o.css" />
+    <Content Include="Scripts\Stars\themes\fontawesome-stars.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -239,6 +238,7 @@
     <Content Include="Views\Reviews\Details.cshtml" />
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Scripts\Stars\jquery.barrating.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
