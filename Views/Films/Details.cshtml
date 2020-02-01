@@ -133,54 +133,56 @@
             @Html.ActionLink("Edit Review", "Edit", "Reviews", new { id = review.ReviewID }, null) |
             @Html.ActionLink("All Reviews", "Index", "Reviews")
         </p>
-        <div>
-            <h4>Actors</h4>
-            <hr />
-            @foreach (var actor in Model.Actors)
-            {
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => actor.PersonFname)
-                    </dt>
+        
+    }
+</div>
 
-                    <dd>
-                        @Html.DisplayFor(model => actor.PersonFname)
-                    </dd>
+<div>
+    <h4>Actors</h4>
+    <hr />
+    @foreach (var actor in Model.Actors)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => actor.PersonFname)
+            </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => actor.PersonSname)
-                    </dt>
+            <dd>
+                @Html.DisplayFor(model => actor.PersonFname)
+            </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => actor.PersonSname)
-                    </dd>
+            <dt>
+                @Html.DisplayNameFor(model => actor.PersonSname)
+            </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => actor.PersonDesc)
-                    </dt>
+            <dd>
+                @Html.DisplayFor(model => actor.PersonSname)
+            </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => actor.PersonDescTrimmed)
-                    </dd>
+            <dt>
+                @Html.DisplayNameFor(model => actor.PersonDesc)
+            </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => actor.PersonImage)
-                    </dt>
+            <dd>
+                @Html.DisplayFor(model => actor.PersonDescTrimmed)
+            </dd>
 
-                    <dd>
-                        @if (actor.PersonImage != null)
-                        {
-                            <img src="@Url.Content(actor.PersonImage)" width="100" />
-                        }
-                    </dd>
+            <dt>
+                @Html.DisplayNameFor(model => actor.PersonImage)
+            </dt>
 
-                </dl>
-                <p>
-                    @Html.ActionLink("Full Bio", "Details", "Persons",
-                   new { id = actor.PersonId }, "") |
-                    @Html.ActionLink("Edit Person", "Edit", "Persons", new { id = actor.PersonId }, null ) |
-                </p>
-            }
-        </div>
+            <dd>
+                @if (actor.PersonImage != null)
+                {
+                    <img src="@Url.Content(actor.PersonImage)" width="100" />
+                }
+            </dd>
+
+        </dl>
+        <p>
+            @Html.ActionLink("Full Bio", "Details", "Persons",
+           new { id = actor.PersonId }, "") |
+            @Html.ActionLink("Edit Person", "Edit", "Persons", new { id = actor.PersonId }, null) |
+        </p>
     }
 </div>
